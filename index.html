@@ -5,23 +5,65 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock-Paper-Scissors Game</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
     <h1>Rock-Paper-Scissors Game</h1>
-    <p>Drop down the menu and select your move. Best of five wins. Good luck!</p>
-    <div class="playerMove">
-        <label for="playerMove"></label>
-        <select name="playerMove" id="playerMove" onchange="this.form.submit()">
-            <option value="rock">Rock</option>
-            <option value="paper">Paper</option>
-            <option value="scissors">Scissors</option>
-        </select>
-        <button>Submit</button>
+    <p>Select your move. Best of five wins. Good luck!</p>
+   
+   
+    <div class="selection">
+        <div class="rock"><a href="#"><img id="rockID" src="/media/rock.jpg" alt="picture of a rock"></a></div>
+        <div class="paper"><a href="#"><img id="paperID" src="/media/paper.jpeg" alt="picture of some papers"></a></div>
+        <div class="scissors"><a href="#"><img id="scissorsID" src="/media/scissors.jpg" alt="picture of a scissors"></a></div>
     </div>
 
+<script defer>
+    /*
+1. player selects move
+2. on selection => random number is generated and random outcome is set according to number
+3. announce result
+4. reduce 1 from number of games played (starts with 5)
+5. when number of games reaches 0, finish the game & announce overall result. 
+*/
 
 
+let tallyPlayer = 0;
+let tallyComputer = 0;
+let counter = 5;
+
+// random number generation
+
+function resultGenerator () {
+    let a = Math.random();
+
+    if (a <= 0.33 ) {
+        tallyComputer++
+        counter--
+        console.log ("Player: " + tallyPlayer)
+        console.log ("Computer: " + tallyComputer)
+    }
+    
+    else if (a <= 0.66) {
+        console.log ("Player: " + tallyPlayer)
+        console.log ("Computer: " + tallyComputer)
+    }
+    
+    else {
+        tallyPlayer++
+        counter--
+        console.log ("Player: " + tallyPlayer)
+        console.log ("Computer: " + tallyComputer)
+    }
+}
+
+//click event
+document.getElementById ("rockID").addEventListener("click", resultGenerator);
+document.getElementById ("paperID").addEventListener("click", resultGenerator);
+document.getElementById ("scissorsID").addEventListener("click", resultGenerator);
+
+</script>
 
 </body>
 </html>
