@@ -14,24 +14,18 @@
    
    
     <div class="selection">
-        <div class="rock"><a href="#"><img id="rockID" src="/media/rock.jpg" alt="picture of a rock"></a></div>
-        <div class="paper"><a href="#"><img id="paperID" src="/media/paper.jpeg" alt="picture of some papers"></a></div>
-        <div class="scissors"><a href="#"><img id="scissorsID" src="/media/scissors.jpg" alt="picture of a scissors"></a></div>
+        <div class="rock"><a href="#"><img class="move" id="rockID" src="/media/rock.jpg" alt="picture of a rock"></a></div>
+        <div class="paper"><a href="#"><img class="move" id="paperID" src="/media/paper.jpeg" alt="picture of some papers"></a></div>
+        <div class="scissors"><a href="#"><img class="move" id="scissorsID" src="/media/scissors.jpg" alt="picture of a scissors"></a></div>
     </div>
 
-<script defer>
-    /*
-1. player selects move
-2. on selection => random number is generated and random outcome is set according to number
-3. announce result
-4. reduce 1 from number of games played (starts with 5)
-5. when number of games reaches 0, finish the game & announce overall result. 
-*/
+    <p id="dynamicText">Click on a move to start the game.</p>
+    <p id="announcer"></p>
 
+<script defer>
 
 let tallyPlayer = 0;
 let tallyComputer = 0;
-let counter = 5;
 
 // random number generation
 
@@ -40,28 +34,54 @@ function resultGenerator () {
 
     if (a <= 0.33 ) {
         tallyComputer++
-        counter--
-        console.log ("Player: " + tallyPlayer)
-        console.log ("Computer: " + tallyComputer)
+        document.getElementById("dynamicText").textContent="Player's score: " + tallyPlayer + " Computer's score: " + tallyComputer
+        document.getElementById("announcer").textContent="Oh no computer won this round."
     }
     
     else if (a <= 0.66) {
-        console.log ("Player: " + tallyPlayer)
-        console.log ("Computer: " + tallyComputer)
+        document.getElementById("dynamicText").textContent="Player's score: " + tallyPlayer + " Computer's score: " + tallyComputer
+        document.getElementById("announcer").textContent="It is a draw. You and computer selected the same move."
     }
     
     else {
         tallyPlayer++
-        counter--
-        console.log ("Player: " + tallyPlayer)
-        console.log ("Computer: " + tallyComputer)
+        document.getElementById("dynamicText").textContent="Player's score: " + tallyPlayer + " Computer's score: " + tallyComputer
+        document.getElementById("announcer").textContent="You won this round. Well done!"
     }
+
 }
 
 //click event
-document.getElementById ("rockID").addEventListener("click", resultGenerator);
-document.getElementById ("paperID").addEventListener("click", resultGenerator);
-document.getElementById ("scissorsID").addEventListener("click", resultGenerator);
+
+function clickListener () {
+    if (tallyComputer < 3 && tallyPlayer < 3) {
+        document.getElementById ("rockID").addEventListener("click", game);
+        document.getElementById ("paperID").addEventListener("click", game);
+        document.getElementById ("scissorsID").addEventListener("click", game);
+    }
+}
+
+
+clickListener()
+
+//game finishing sequence
+
+function gameFinisher () {
+    if (tallyPlayer === 3) {
+    document.getElementById("dynamicText").textContent="Player's score: " + tallyPlayer + " Computer's score: " + tallyComputer
+    document.getElementById("announcer").textContent="Congratulations, you have won this game. Refresh the page to play a new round."
+    }
+
+    else if (tallyComputer === 3) {
+    document.getElementById("dynamicText").textContent="Player's score: " + tallyPlayer + " Computer's score: " + tallyComputer
+    document.getElementById("announcer").textContent="Oh no, looks like computer won this game. Refresh the page to play a new round."   
+    }
+}
+
+function game () {;
+    resultGenerator();
+    gameFinisher();
+}
 
 </script>
 
