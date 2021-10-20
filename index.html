@@ -70,18 +70,25 @@ function gameFinisher () {
     if (tallyPlayer === 3) {
     document.getElementById("dynamicText").textContent="Player's score: " + tallyPlayer + " Computer's score: " + tallyComputer
     document.getElementById("announcer").textContent="Congratulations, you have won this game. Refresh the page to play a new round."
-    }
+    document.getElementById("rockID").style.pointerEvents = "none";
+    document.getElementById("paperID").style.pointerEvents = "none"
+    document.getElementById("scissorsID").style.pointerEvents = "none"    
+}
 
     else if (tallyComputer === 3) {
     document.getElementById("dynamicText").textContent="Player's score: " + tallyPlayer + " Computer's score: " + tallyComputer
-    document.getElementById("announcer").textContent="Oh no, looks like computer won this game. Refresh the page to play a new round."   
+    document.getElementById("announcer").textContent="Oh no, looks like computer won this game. Refresh the page to play a new round."
+    document.getElementById("rockID").style.pointerEvents = "none";
+    document.getElementById("paperID").style.pointerEvents = "none"
+    document.getElementById("scissorsID").style.pointerEvents = "none"
     }
 }
 
-function game () {;
-    resultGenerator();
-    gameFinisher();
+function game () {
+    resultGenerator ();
+    gameFinisher ();
 }
+
 
 </script>
 
